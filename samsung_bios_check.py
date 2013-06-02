@@ -13,8 +13,8 @@ def run_command(cmd):
 
 def main():
     bios_str = open('/sys/devices/virtual/dmi/id/bios_version').read().strip()
-    if not findall(r'[0-9]{2}[A-z]{2,3}', bios_str):
-        print 'Sorry, I only understand BIOS versions in the format [0-9]{2}[A-z]{2,3}. Yours is %s' % bios_str
+    if not findall(r'[0-9]{2}[A-Z]{2,3}', bios_str):
+        print 'Sorry, I only understand BIOS versions in the format [0-9]{2}[A-Z]{2,3}. Yours is %s' % bios_str
         exit(1)
     bios_version = int(findall(r'[0-9]{2}', bios_str)[0])
     bios_model = findall(r'[A-Z]{2,3}', bios_str)[0]
