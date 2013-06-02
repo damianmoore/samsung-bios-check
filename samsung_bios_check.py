@@ -2,6 +2,7 @@
 
 from re import findall
 from subprocess import Popen, PIPE
+from time import sleep
 from urllib import urlopen
 
 
@@ -20,7 +21,17 @@ def main():
     print 'BIOS version installed: %d (%s)' % (bios_version, bios_str)
 
     url = 'http://sbuservice.samsungmobile.com/BUWebServiceProc.asmx/GetContents?platformID=%s&PartNumber=AAAA' % bios_model
-    response = urlopen(url).read()
+    max_attempts = 3
+    for i in range(max_attempts):
+        try:
+            response = urlopen(url).read()
+            break
+        except IOError:
+            if i < max_attempts - 1:
+                sleep(1)
+            else:
+                print 'Sorry, I tried to contact the Samsung site %d times but giving up now. Please try again later.' % max_attempts
+                exit(1)
 
     try:
         web_str = findall(r'<Version>([A-Z0-9]+)</Version>', response)[0]
