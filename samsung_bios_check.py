@@ -38,6 +38,10 @@ def main():
         web_version = int(findall(r'[0-9]{2}', web_str)[0])
         print 'BIOS version available: %d (%s)' % (web_version, web_str)
 
+        download_filename = findall(r'<FilePathName>([A-Za-z0-9._]+)</FilePathName>', response)[0]
+        base_url = 'http://sbuservice.samsungmobile.com/upload/BIOSUpdateItem/'
+        print 'Installer URL: %s%s' % (base_url, download_filename)
+
         if web_version > bios_version:
             print '\nBIOS UPDATE AVAILABLE!'
         else:
