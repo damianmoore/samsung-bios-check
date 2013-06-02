@@ -13,4 +13,4 @@ The script gets your current BIOS version number via sysfs. It then downloads th
 
 To perform the upgrade once you boot Windows you'll need to go to the support section of the Samsung site, find your product, find 'Manuals & Downloads', then under 'Firmware' there'll be an item called 'Update Software (Firmware) (ver.1.0.0.X)'. Click the blue 'EXE' button/link to download 'BIOSUpdate.exe'.
 
-This has been tested on a couple of NP900X3C (Series 9) machines but should work on others unless Samsung change their numbering system or update software. Contributions welcome.
+This has been tested on a couple of NP900X3C (Series 9) machines but should work on others unless Samsung change their numbering system or update software. Contributions welcome. There is also a discussion on [Reddit](http://redd.it/1fglr7).
