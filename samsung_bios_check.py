@@ -10,23 +10,8 @@ def run_command(cmd):
     return p.communicate()[0].strip()
 
 
-def dependencies_met(dependencies=[]):
-    for dependency in dependencies:
-        if not len(run_command('which %s' % dependency)):
-            return False
-    return True
-
-
 def main():
-    dependencies = ['dmidecode', ]
-    if not dependencies_met(dependencies):
-        print 'You need to have the following installed on your system: %s' % ', '.join(dependencies)
-        exit(1)
-
-    bios_str = run_command('dmidecode -s bios-version')
-    if not bios_str:
-        print 'Couldn\'t get BIOS version from dmidecode, try running as root (with sudo)'
-        exit(1)
+    bios_str = open('/sys/devices/virtual/dmi/id/bios_version').read().strip()
     if not findall(r'[0-9]{2}[A-z]{2,3}', bios_str):
         print 'Sorry, I only understand BIOS versions in the format [0-9]{2}[A-z]{2,3}. Yours is %s' % bios_str
         exit(1)
