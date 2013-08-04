@@ -1,5 +1,9 @@
 #!/usr/bin/env python2.7
 
+# This file is sourced from the project https://github.com/damianmoore/samsung-bios-check
+# Copyright (C) 2013 Chris Horler
+# For licencing please refer to the the project LICENSE file
+
 import sys
 import os
 import argparse
