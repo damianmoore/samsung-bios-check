@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+# This file is sourced from the project https://github.com/damianmoore/samsung-bios-check
+# Copyright (C) 2013 Damian Moore
+# For licencing please refer to the the project LICENSE file
+
 from re import findall
 from subprocess import Popen, PIPE
 from time import sleep
