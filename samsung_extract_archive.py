@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python
 
 # This file is sourced from the project https://github.com/damianmoore/samsung-bios-check
 # Copyright (C) 2013 Chris Horler
@@ -12,7 +12,7 @@ from contextlib import closing
 
 import pefile
 
-LPCK_MAGIC = 'LPCK'
+LPCK_MAGIC = b'LPCK'
 
 class LPCKFormatError(Exception):
     """Unrecognised file format"""
@@ -67,9 +67,9 @@ def read_file_header(f, list_only):
     header.e_path = path
     
     if list_only:
-        print >>sys.stderr, "File: {}".format(path)
+        print("File: {}".format(path))
     else:
-        print >>sys.stderr, "Extracting File: {}".format(path)
+        print("Extracting File: {}".format(path))
 
     return header
 
@@ -81,7 +81,7 @@ def extract_file(f, list_only):
         return
     
     data = f.read(file_header.e_size)
-    with open(file_header.e_path, 'w') as g:
+    with open(file_header.e_path, 'wb') as g:
         g.write(data)
 
         
@@ -89,7 +89,7 @@ def extract(f, list_only=False):
     seek_lpck_header(f)
 
     lpck_header = read_lpck_header(f)
-    for x in xrange(lpck_header.e_count):
+    for x in range(lpck_header.e_count):
         extract_file(f, list_only)
             
 
@@ -100,8 +100,8 @@ def main():
     parser.add_argument("-l", "--list", help="list archive contents", action="store_true")
     args = parser.parse_args()
    
-    print >>sys.stderr, "Opening / Extracting: {}".format(args.path)
-    with open(args.path) as f:
+    print("Opening / Extracting: {}".format(args.path))
+    with open(args.path, 'rb') as f:
         extract(f, args.list)
 
 if __name__ == '__main__':
